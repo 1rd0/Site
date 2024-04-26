@@ -1,0 +1,23 @@
+/* Добавляем стили для увеличения изображения при наведении */
+.card-img-overlay {
+  transition: transform 0.3s ease;
+}
+
+.card-img-overlay:hover {
+  transform: scale(1.1);
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-field {
+  flex: 1;
+}
+
+.dropdown-container {
+  margin-left: 10px; /* Adjust as needed */
+}
+
+ 

@@ -1,0 +1,10 @@
+.deas {
+  width: 85px;
+  height: 40px;
+  background-color: darkgray;
+  margin-right: 15px;
+  padding: 10px;
+  border-radius: 50; /* или можно указать тип границы, если нужно */
+  border-radius: 50px;
+  cursor: pointer;
+}

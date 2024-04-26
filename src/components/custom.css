@@ -1,0 +1,10 @@
+.NavLink:hover {
+  text-decoration: underline;
+}
+.card-img-overlay {
+  transition: transform 0.3s ease;
+}
+
+.card-img-overlay:hover {
+  transform: scale(1.1);
+}
