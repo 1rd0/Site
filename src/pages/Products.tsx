@@ -22,16 +22,32 @@ export default function Store() {
   const [sortstr, setsortstr] = useState<string>("");
 
   useEffect(() => {
-    fetch("https://localhost:7259/api/Item")
-      .then((response) => response.json())
-      .then((response) => {
-        setItems(response);
-        setOriginalItems(response);
+    const token = sessionStorage.getItem("token");
+    
+    if (token) {
+      fetch("https://localhost:7259/api/Item", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch((error) => {
-        console.error("Проблема с получением данных", error);
-        setCheckData(false);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Ошибка получения данных");
+          }
+          return response.json();
+        })
+        .then((response) => {
+          setItems(response);
+          setOriginalItems(response);
+        })
+        .catch((error) => {
+          console.error("Проблема с получением данных", error);
+          setCheckData(false);
+        });
+    } else {
+      console.error("Токен не найден");
+      setCheckData(false);
+    }
   }, []);
 
   const handlsearch = (searchTerm: string) => {
