@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, FormControl, InputGroup, Alert } from "react-bootstrap";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useHref } from "react-router-dom";
- 
+import "./Reg.css";
 export default function Reg() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -74,56 +74,65 @@ export default function Reg() {
     const userData = {
       id: randomId,
       userName: email,
-      passwordHashe: password, 
+      passwordHashe: password,
       profession: "string",
     };
-  console.log(userData);
+    console.log(userData);
     try {
-      const response = await fetch('https://localhost:7259/api/User/register', {
-        method: 'POST',
+      const response = await fetch("https://localhost:7259/api/User/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData) // Передача данных пользователя в теле запроса
+        body: JSON.stringify(userData), // Передача данных пользователя в теле запроса
       });
-  
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
-       
-    console.log('User registered successfully!');
 
-    // Второй запрос после успешной регистрации
-    const cartResponse = await fetch(`https://localhost:7259/api/Shopingcarts/${email}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      } 
-    });
+      console.log("User registered successfully!");
 
-    if (!cartResponse.ok) {
-      throw new Error('Could not create user cart');
-    }
+      // Второй запрос после успешной регистрации
+      const cartResponse = await fetch(
+        `https://localhost:7259/api/Shopingcarts/${email}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    console.log('User cart created successfully!');
-    
-    // Перенаправление на другую страницу или выполнение других действий после успешного завершения обоих запросов
-    window.location.href = '/';
+      if (!cartResponse.ok) {
+        throw new Error("Could not create user cart");
+      }
+
+      console.log("User cart created successfully!");
+
+      // Перенаправление на другую страницу или выполнение других действий после успешного завершения обоих запросов
+      window.location.href = "/";
     } catch (error) {
       // Обработка ошибок при отправке запроса или получении ответа
-      console.error('There was a problem registering the user:', error);
+      console.error("There was a problem registering the user:", error);
       // Дополнительные действия при возникновении ошибки, например, отображение сообщения об ошибке пользователю
     }
   };
-  
 
   return (
-    <div style={{ fontSize: "35px" }}>
-      <form onSubmit={handleSubmit}>
-        <h1>Registration</h1>
+    <div
+      className="label-container"
+      style={{
+        fontFamily: "Montserrat",
+        fontStyle: "normal",
+        fontSize: "35px",
+      }}
+    >
+      <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label>Электронная почта</Form.Label>
           <Form.Control
+            style={{ width: "500px", height: "50px" }}
             name="email"
             type="email"
             placeholder="Enter email"
@@ -136,8 +145,10 @@ export default function Reg() {
             {emailError}
           </Form.Control.Feedback>
         </Form.Group>
-        <InputGroup className="mb-3">
+        <Form.Label>Пароль</Form.Label>
+        <InputGroup className="mb-3" style={{ width: "500px" }}>
           <FormControl
+            style={{ width: "400px", height: "50px" }}
             name="password"
             placeholder="Enter your password"
             type={showPassword ? "text" : "password"}
@@ -158,7 +169,12 @@ export default function Reg() {
             {passwordError}
           </Form.Control.Feedback>
         </InputGroup>
-        <Button type="submit">Sign Up</Button>{" "}
+        <Button
+          style={{ fontSize: "32px", width: "220px", marginTop: "20px" }}
+          type="submit"
+        >
+          Создать
+        </Button>{" "}
       </form>
     </div>
   );

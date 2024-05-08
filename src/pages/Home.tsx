@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
 import axios from "axios";
 import { useShoppingCart } from "../context/ShoppingCartContext";
+import "./Home.css";
+import { Button, Form, FormControl, InputGroup, Alert } from "react-bootstrap";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Home() {
   const [username, setUsername] = useState(
@@ -14,7 +16,7 @@ export default function Home() {
   );
   const [error, setError] = useState("");
   const { setCartItems } = useShoppingCart();
-
+  const [showPassword, setShowPassword] = useState(false);
   useEffect(() => {
     if (isLoggedIn) {
       fetchCartItemsFromDatabase(); // Если пользователь авторизован, загружаем данные корзины
@@ -64,7 +66,13 @@ export default function Home() {
   };
 
   return (
-    <div style={{ fontSize: "35px" }}>
+    <div
+      style={{
+        fontFamily: "Montserrat",
+        fontStyle: "normal",
+        fontSize: "35px",
+      }}
+    >
       {isLoggedIn ? (
         <div>
           <p>Добро пожаловать, {username}!</p>
@@ -81,32 +89,53 @@ export default function Home() {
       ) : (
         <div>
           <form>
-            <label>
-              Имя пользователя:
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </label>
-            <br />
-            <label>
-              Пароль:
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-            <br />
-            {error && <p>{error}</p>}
-            <Button type="button" onClick={handleLogin}>
-              Войти
-            </Button>
-
-            <Button type="button" href="/reg">
-              Регистрация
-            </Button>
+            {" "}
+            <div className="label-container">
+              <label>Имя пользователя </label>{" "}
+              <InputGroup style={{ width: "500px", height: "50px" }}>
+                <FormControl
+                  onChange={(e) => setUsername(e.target.value)}
+                  name="password"
+                  placeholder="Enter your EMAIL"
+                  value={username}
+                />
+              </InputGroup>
+              <label>Пароль </label>
+              <InputGroup style={{ width: "500px" }}>
+                <FormControl
+                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  placeholder="Enter your password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                />
+                <InputGroup.Text>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </Button>
+                </InputGroup.Text>
+              </InputGroup>
+              <br />
+              {error && <p>{error}</p>}
+              <div className="button-container"></div>
+              <Button
+                style={{ fontSize: "32px", width: "220px" }}
+                type="button"
+                onClick={handleLogin}
+              >
+                Войти
+              </Button>
+              <Button
+                style={{ fontSize: "32px", width: "220px", marginTop: "20px" }}
+                type="button"
+                href="/reg"
+              >
+                Регистрация
+              </Button>
+            </div>
           </form>
         </div>
       )}
