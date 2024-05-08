@@ -22,7 +22,7 @@ export default function Store() {
   const [sortstr, setsortstr] = useState<string>("");
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     
     if (token) {
       fetch("https://localhost:7259/api/Item", {
@@ -47,6 +47,7 @@ export default function Store() {
     } else {
       console.error("Токен не найден");
       setCheckData(false);
+      // переадресацию сделай да
     }
   }, []);
 
