@@ -74,9 +74,11 @@ export default function Home() {
       }}
     >
       {isLoggedIn ? (
-        <div>
+        <div style={{}}>
           <p>Добро пожаловать, {username}!</p>
           <Button
+            style={{ fontSize: "32px", width: "220px" }}
+            className="w-20 btn-light btn-outline-dark"
             onClick={() => {
               handleLogout(); // функция для выхода из учетной записи
               // функция для обновления корзины
@@ -94,18 +96,20 @@ export default function Home() {
               <label>Имя пользователя </label>{" "}
               <InputGroup style={{ width: "500px", height: "50px" }}>
                 <FormControl
+                  style={{ fontSize: "25px" }}
                   onChange={(e) => setUsername(e.target.value)}
                   name="password"
-                  placeholder="Enter your EMAIL"
+                  placeholder="Введите свою почту"
                   value={username}
                 />
               </InputGroup>
               <label>Пароль </label>
               <InputGroup style={{ width: "500px" }}>
                 <FormControl
+                  style={{ fontSize: "25px" }}
                   onChange={(e) => setPassword(e.target.value)}
                   name="password"
-                  placeholder="Enter your password"
+                  placeholder="Введите свой пароль"
                   type={showPassword ? "text" : "password"}
                   value={password}
                 />
@@ -119,9 +123,10 @@ export default function Home() {
                 </InputGroup.Text>
               </InputGroup>
               <br />
-              {error && <p>{error}</p>}
+              {error && <p style={{ color: "maroon" }}>{error}</p>}
               <div className="button-container"></div>
               <Button
+                className="w-20 btn-light btn-outline-dark"
                 style={{ fontSize: "32px", width: "220px" }}
                 type="button"
                 onClick={handleLogin}
@@ -130,6 +135,7 @@ export default function Home() {
               </Button>
               <Button
                 style={{ fontSize: "32px", width: "220px", marginTop: "20px" }}
+                className="w-20 btn-light btn-outline-dark"
                 type="button"
                 href="/reg"
               >

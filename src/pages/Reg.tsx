@@ -20,7 +20,7 @@ export default function Reg() {
     const expression = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const result = expression.test(trimmedEmail);
     if (!result) {
-      setEmailError("Incorrect email format");
+      setEmailError("Неправильный формат почты");
     } else {
       setEmailError("");
     }
@@ -34,16 +34,16 @@ export default function Reg() {
 
     const uppercaseRegex = /[A-Z]/;
     if (!uppercaseRegex.test(newPassword.toString())) {
-      errors.push("Password must contain at least one uppercase letter");
+      errors.push("Пароль должен содержать хотя бы одну заглавную букву");
     }
 
     const numberRegex = /[0-9]/;
     if (!numberRegex.test(newPassword.toString())) {
-      errors.push("Password must contain at least one number");
+      errors.push("Пароль должен содержать хотя бы одну цифру");
     }
 
     if (newPassword.length < 8) {
-      errors.push("Password must be at least 8 characters long");
+      errors.push("Длина пароля должна составлять не менее 8 символов");
     }
 
     setPasswordError(errors.join("\n"));
@@ -132,25 +132,25 @@ export default function Reg() {
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Электронная почта</Form.Label>
           <Form.Control
-            style={{ width: "500px", height: "50px" }}
+            style={{ fontSize: "25px", width: "500px", height: "50px" }}
             name="email"
             type="email"
-            placeholder="Enter email"
+            placeholder="Введите свою почту"
             value={email}
             onChange={emailHandler}
             onBlur={blurHandler}
             isInvalid={emailDirty && !!emailError}
           />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback style={{ color: "maroon" }} type="invalid">
             {emailError}
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Label>Пароль</Form.Label>
         <InputGroup className="mb-3" style={{ width: "500px" }}>
           <FormControl
-            style={{ width: "400px", height: "50px" }}
+            style={{ fontSize: "25px", width: "400px", height: "50px" }}
             name="password"
-            placeholder="Enter your password"
+            placeholder="Введите свой пароль"
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={passwordHandler}
@@ -165,11 +165,12 @@ export default function Reg() {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </Button>
           </InputGroup.Text>
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback style={{ color: "maroon" }} type="invalid">
             {passwordError}
           </Form.Control.Feedback>
         </InputGroup>
         <Button
+          className="w-20 btn-light btn-outline-dark"
           style={{ fontSize: "32px", width: "220px", marginTop: "20px" }}
           type="submit"
         >

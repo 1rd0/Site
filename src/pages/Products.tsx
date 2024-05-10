@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Col, Row, Button, Dropdown } from "react-bootstrap";
 import { Items } from "../components/Items";
 import Categories from "../components/Categories";
+
 interface Item {
   id: number;
   name: string;
@@ -20,10 +21,10 @@ export default function Store() {
   const [names, setNames] = useState<string>("");
   const [sortByPriceAsc, setSortByPriceAsc] = useState<boolean>(true);
   const [sortstr, setsortstr] = useState<string>("");
-
+  const [showToast, setShowToast] = useState<boolean>(false);
   useEffect(() => {
     const token = localStorage.getItem("token");
-    
+
     if (token) {
       fetch("https://localhost:7259/api/Item", {
         headers: {
@@ -84,13 +85,13 @@ export default function Store() {
 
     setItems(sortedItems);
     setSortByPriceAsc(!sortByPriceAsc);
-    setsortstr("Price");
+    setsortstr("Цене");
   };
 
   const handleSortByAlphabet = () => {
     const sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));
     setItems(sortedItems);
-    setsortstr("Alphabet");
+    setsortstr("Названию");
   };
   const handleCategorySelect = (categoryId: number | null) => {
     setSelectedCategory(categoryId);
@@ -127,10 +128,10 @@ export default function Store() {
               cursor: "pointer",
               transition: "all",
             }}
-            className="btn btn-light btn-outline-dark "
+            className=" btn btn-light btn-outline-dark "
             onClick={handleResetFilters}
           >
-            All
+            Всё
           </Button>
           <Categories onSelectCategory={handleCategorySelect} />
         </div>
@@ -144,7 +145,7 @@ export default function Store() {
         >
           {" "}
           <input
-            style={{ fontSize: "20px" }}
+            style={{ fontSize: "25px" }}
             type="text"
             placeholder="Введите название..."
             value={names}
@@ -156,7 +157,7 @@ export default function Store() {
               className="btn-light"
               onClick={handleResetFilters}
             >
-              Reset
+              Сбросить
             </Button>
 
             <Dropdown.Menu></Dropdown.Menu>
@@ -166,21 +167,21 @@ export default function Store() {
                 variant="light"
                 id="dropdown-basic"
               >
-                Sort by {sortstr}
+                Фильтр по {sortstr}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
                 <Dropdown.Item onClick={handleSortByPrice}>
-                  Price (Low to High)
+                  Цене (Low to High)
                 </Dropdown.Item>
                 <Dropdown.Item onClick={handleSortByPrice}>
-                  Price (High to Low)
+                  Цене (High to Low)
                 </Dropdown.Item>
                 <Dropdown.Item onClick={handleSortByAlphabet}>
-                  Ascending
+                  A-Я
                 </Dropdown.Item>
                 <Dropdown.Item onClick={() => setItems([...items].reverse())}>
-                  Descending
+                  Я-А
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

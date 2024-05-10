@@ -38,7 +38,7 @@ export function Items({
       <Card.Body className="d-flex flex-column">
         <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
           <span className="fs-2">{name}</span>
-          
+
           <span className="ms-2 text-muted ">{formatCurrency(price)}</span>
         </Card.Title>
         <Card.Footer>
@@ -51,7 +51,7 @@ export function Items({
               onClick={() => increaseCartQuantitu(id)}
             >
               {" "}
-              Add
+              Добавить
             </Button>
           ) : (
             <div
@@ -70,7 +70,7 @@ export function Items({
                   +
                 </Button>
                 <div>
-                  <span className="fs-1">{quantity}</span> in cart
+                  <span className="fs-1">{quantity}</span> в корзине
                 </div>
 
                 <Button
@@ -88,7 +88,7 @@ export function Items({
                   size="sm"
                   onClick={() => removefromcart(id)}
                 >
-                  Remove
+                  Удалить
                 </Button>
               </div>
             </div>

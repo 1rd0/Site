@@ -1,5 +1,5 @@
-const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
-  currency: "JPN",
+const CURRENCY_FORMATTER = new Intl.NumberFormat("ru-RU", {
+  currency: "RUB",
   style: "currency",
 });
 

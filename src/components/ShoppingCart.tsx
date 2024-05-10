@@ -4,6 +4,9 @@ import { Items } from "./Items";
 import { CartItem } from "./CartItem";
 import { formatCurrency } from "../Utilities/FormatCurrency";
 import React, { useState, useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type ShoppingCartProviderProps = {
   isOpen: boolean;
@@ -21,7 +24,7 @@ export function ShoppingCart({ isOpen }: ShoppingCartProviderProps) {
   const { closeCart, cartitems } = useShoppingCart();
   const [items, setItems] = useState<Item[]>([]);
   const [checkdata, setcheck] = useState<boolean>(true);
-
+  const [showModal, setShowModal] = useState<boolean>(false);
   useEffect(() => {
     fetch("https://localhost:7259/api/Item")
       .then((response) => response.json())
@@ -32,6 +35,33 @@ export function ShoppingCart({ isOpen }: ShoppingCartProviderProps) {
       });
   }, []);
 
+  const placeOrder = () => {
+    const OrderData = {
+      username: localStorage.getItem("username"),
+      shopcarts: cartitems,
+    };
+
+    fetch("https://localhost:7259/api/Order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(OrderData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to place order");
+        } else {
+          console.log("good orders");
+          localStorage.setItem("shoping-cart", "[]");
+
+          setShowModal(true);
+        }
+      })
+      .catch((error) => {
+        console.error("Problem with placing order", error);
+      });
+  };
   return (
     <Offcanvas
       style={{ fontFamily: "Montserrat", fontStyle: "normal" }}
@@ -48,6 +78,13 @@ export function ShoppingCart({ isOpen }: ShoppingCartProviderProps) {
             <CartItem key={item.id} {...item} />
           ))}
           <div className="ms-auto fw-bold fs-5">
+            <Button
+              style={{ marginRight: "80px" }}
+              className=" ms-auto fw-bold fs-5 w-20 btn-light btn-outline-success"
+              onClick={placeOrder}
+            >
+              Оформить заказ
+            </Button>
             Total{" "}
             {formatCurrency(
               cartitems.reduce((total, cartItem) => {
@@ -58,6 +95,27 @@ export function ShoppingCart({ isOpen }: ShoppingCartProviderProps) {
           </div>
         </Stack>
       </Offcanvas.Body>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title style={{ fontWeight: "bold", color: "green" }}>
+            Заказ успешно оформлен!
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ fontSize: "23px" }}>
+          Ваш заказ успешно оформлен. Спасибо за покупку!
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className=" ms-auto fw-bold fs-5 w-20 btn-light btn-outline-dark"
+            variant="secondary"
+            onClick={() => setShowModal(false)}
+            href="/Products"
+          >
+            Закрыть
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Offcanvas>
   );
 }

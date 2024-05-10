@@ -49,7 +49,7 @@ function OffcanvasExample() {
                   as={NavLink}
                   onClick={handleNavLinkClick} // Добавляем обработчик на клик
                 >
-                  Home
+                  Главаня
                 </Nav.Link>
                 <Nav.Link
                   className="NavLink"
@@ -58,7 +58,7 @@ function OffcanvasExample() {
                   as={NavLink}
                   onClick={handleNavLinkClick} // Добавляем обработчик на клик
                 >
-                  Products
+                  Товары
                 </Nav.Link>
               </Nav>
             </Offcanvas.Body>
