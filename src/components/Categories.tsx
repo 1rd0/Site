@@ -40,6 +40,8 @@ class Categories extends Component<CategoriesProps, CategoriesState> {
           <Button
             className="btn btn-light btn-outline-dark "
             style={{
+              fontFamily: "Montserrat",
+              fontSize: "15px",
               width: "85px",
               height: "40px",
               outline: "1px",

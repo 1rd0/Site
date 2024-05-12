@@ -1,6 +1,7 @@
 import { Button, Card } from "react-bootstrap";
 import { formatCurrency } from "../Utilities/FormatCurrency";
 import { useShoppingCart } from "../context/ShoppingCartContext";
+import { useState } from "react";
 
 type ItemProps = {
   id: number;
@@ -25,15 +26,24 @@ export function Items({
     decreaseCartQuantitu,
     removefromcart,
   } = useShoppingCart();
+  const [isHovered, setIsHovered] = useState(false); // State to track hover state
 
   const quantity = getItemQuantitu(id);
   return (
-    <Card className="h-100">
+    <Card
+      className="h-100"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <Card.Img
         variant="top"
         src={imgurl}
         height="190px"
-        style={{ objectFit: "cover" }}
+        style={{
+          objectFit: "cover",
+          transform: isHovered ? "scale(0.97)" : "scale(1)",
+          transition: "transform 0.2s ease",
+        }}
       ></Card.Img>
       <Card.Body className="d-flex flex-column">
         <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
@@ -42,11 +52,12 @@ export function Items({
           <span className="ms-2 text-muted ">{formatCurrency(price)}</span>
         </Card.Title>
         <Card.Footer>
-          <span className="fs-2">{description}</span>
+          <span className="fs-4">{description}</span>
         </Card.Footer>
         <div className="mt-auto">
           {quantity === 0 ? (
             <Button
+              style={{ fontSize: "18px" }}
               className="w-100  btn-light btn-outline-dark"
               onClick={() => increaseCartQuantitu(id)}
             >
@@ -83,7 +94,7 @@ export function Items({
               </div>
               <div className="d-flex align-items-center justify-content-center flex-row">
                 <Button
-                  style={{ fontSize: "15px" }}
+                  style={{ fontSize: "18px" }}
                   variant="danger"
                   size="sm"
                   onClick={() => removefromcart(id)}

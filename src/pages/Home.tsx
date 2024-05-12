@@ -26,6 +26,7 @@ export default function Home() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
+        //"https://2f9c-79-98-8-21.ngrok-free.app/api/User/login",
         "https://localhost:7259/api/User/login",
         { userName: username, passwordHashe: password }
       );
@@ -45,6 +46,7 @@ export default function Home() {
   const fetchCartItemsFromDatabase = async () => {
     try {
       const response = await axios.get(
+        // "https://d40d-79-98-8-21.ngrok-free.app/Shopingcarts/${username}"
         `https://localhost:7259/api/Shopingcarts/${username}`
       );
       setCartItems(response.data);
@@ -74,10 +76,18 @@ export default function Home() {
       }}
     >
       {isLoggedIn ? (
-        <div style={{}}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <p>Добро пожаловать, {username}!</p>
+
           <Button
-            style={{ fontSize: "32px", width: "220px" }}
+            style={{ marginTop: "30px", fontSize: "32px", width: "220px" }}
             className="w-20 btn-light btn-outline-dark"
             onClick={() => {
               handleLogout(); // функция для выхода из учетной записи
@@ -87,13 +97,14 @@ export default function Home() {
           >
             Выйти
           </Button>
+          <img style={{ marginTop: "20px" }} src="/imgs/sakura.png"></img>
         </div>
       ) : (
         <div>
           <form>
             {" "}
             <div className="label-container">
-              <label>Имя пользователя </label>{" "}
+              <label style={{ paddingRight: "300px" }}>Авторизация</label>{" "}
               <InputGroup style={{ width: "500px", height: "50px" }}>
                 <FormControl
                   style={{ fontSize: "25px" }}
@@ -103,7 +114,10 @@ export default function Home() {
                   value={username}
                 />
               </InputGroup>
-              <label>Пароль </label>
+              <h1></h1>
+              <h1></h1>
+              <h1></h1>
+              <label> </label>
               <InputGroup style={{ width: "500px" }}>
                 <FormControl
                   style={{ fontSize: "25px" }}
@@ -127,14 +141,14 @@ export default function Home() {
               <div className="button-container"></div>
               <Button
                 className="w-20 btn-light btn-outline-dark"
-                style={{ fontSize: "32px", width: "220px" }}
+                style={{ fontSize: "30px", width: "200px" }}
                 type="button"
                 onClick={handleLogin}
               >
                 Войти
               </Button>
               <Button
-                style={{ fontSize: "32px", width: "220px", marginTop: "20px" }}
+                style={{ fontSize: "30px", width: "200px", marginTop: "20px" }}
                 className="w-20 btn-light btn-outline-dark"
                 type="button"
                 href="/reg"

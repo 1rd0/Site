@@ -9,7 +9,7 @@ interface Item {
   name: string;
   description: string;
   price: number;
-  category:number;
+  category: number;
   imgurl: string;
 }
 

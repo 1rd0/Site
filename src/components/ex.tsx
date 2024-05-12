@@ -76,36 +76,52 @@ function OffcanvasExample() {
             onClick={openCart}
             type="button"
             className="rounded-circle btn btn-light bg-white border-0 btn-hover-light btn-scale"
-            style={{ width: "3.5rem", height: "3.5rem", position: "relative" }}
+            style={{
+              width: "3.5rem",
+              height: "3.5rem",
+              position: "relative",
+              transition: "transform 0.3s ease",
+            }}
+            onMouseEnter={(
+              e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+            ) => (e.currentTarget.style.transform = "scale(1.1)")}
+            onMouseLeave={(
+              e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+            ) => (e.currentTarget.style.transform = "scale(1)")}
           >
             <svg
-              className="w-6 h-6 text-gray-800 dark:text-white"
               aria-hidden="true"
+              focusable="false"
               xmlns="http://www.w3.org/2000/svg"
-              width="34"
-              height="34"
+              viewBox="0 0 40 40"
               fill="none"
-              viewBox="0 0 24 24"
+              width="60" // увеличиваем ширину до 60 единиц
+              height="60" // увеличиваем высоту до 60 единиц
+              style={{ marginLeft: "-15px" }}
             >
               <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 12c.263 0 .524-.06.767-.175a2 2 0 0 0 .65-.491c.186-.21.333-.46.433-.734.1-.274.15-.568.15-.864a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 12 9.736a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 16 9.736c0 .295.052.588.152.861s.248.521.434.73a2 2 0 0 0 .649.488 1.809 1.809 0 0 0 1.53 0 2.03 2.03 0 0 0 .65-.488c.185-.209.332-.457.433-.73.1-.273.152-.566.152-.861 0-.974-1.108-3.85-1.618-5.121A.983.983 0 0 0 17.466 4H6.456a.986.986 0 0 0-.93.645C5.045 5.962 4 8.905 4 9.736c.023.59.241 1.148.611 1.567.37.418.865.667 1.389.697Zm0 0c.328 0 .651-.091.94-.266A2.1 2.1 0 0 0 7.66 11h.681a2.1 2.1 0 0 0 .718.734c.29.175.613.266.942.266.328 0 .651-.091.94-.266.29-.174.537-.427.719-.734h.681a2.1 2.1 0 0 0 .719.734c.289.175.612.266.94.266.329 0 .652-.091.942-.266.29-.174.536-.427.718-.734h.681c.183.307.43.56.719.734.29.174.613.266.941.266a1.819 1.819 0 0 0 1.06-.351M6 12a1.766 1.766 0 0 1-1.163-.476M5 12v7a1 1 0 0 0 1 1h2v-5h3v5h7a1 1 0 0 0 1-1v-7m-5 3v2h2v-2h-2Z"
-              />
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M20.5 6.5a4.75 4.75 0 00-4.75 4.75v.56h-3.16l-.77 11.6a5 5 0 004.99 5.34h7.38a5 5 0 004.99-5.33l-.77-11.6h-3.16v-.57A4.75 4.75 0 0020.5 6.5zm3.75 5.31v-.56a3.75 3.75 0 10-7.5 0v.56h7.5zm-7.5 1h7.5v.56a3.75 3.75 0 11-7.5 0v-.56zm-1 0v.56a4.75 4.75 0 109.5 0v-.56h2.22l.71 10.67a4 4 0 01-3.99 4.27h-7.38a4 4 0 01-4-4.27l.72-10.67h2.22z"
+              ></path>
             </svg>
 
             <div
-              className="rounded-circle bg-black d-flex justify-content-center
-            align-items-center"
+              className="rounded-circle bg-black d-flex justify-content-center align-items-center"
               style={{
                 color: "white",
                 position: "absolute",
                 width: "1.2rem",
                 height: "1.2rem",
                 bottom: 0,
+                transition: "transform 0.3s ease", // добавляем анимацию при изменении размера
               }}
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+                (e.currentTarget.style.transform = "scale(1.2)")
+              } // при наведении увеличиваем размер
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              } // при уходе уменьшаем размер до обычного
             >
               {cartQuantity}
             </div>

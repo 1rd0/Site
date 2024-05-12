@@ -9,10 +9,9 @@ export default function Reg() {
   const [emailDirty, setEmailDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
   const [emailError, setEmailError] = useState("Email cannot be empty");
-  const [passwordError, setPasswordError] = useState(
-    "Password cannot be empty"
-  );
+  const [passwordError, setPasswordError] = useState("Не должно быть пыстым");
   const [showPassword, setShowPassword] = useState(false);
+  const [showLine, setShowLine] = useState(false);
 
   const emailHandler = (e: { target: { value: string } }) => {
     const trimmedEmail = e.target.value.trim();
@@ -63,7 +62,7 @@ export default function Reg() {
   };
 
   const passwordColor = () => {
-    if (passwordError === "") return "success";
+    if (passwordError === "") return "white";
     else if (passwordError.split("\n").length === 1) return "danger";
     else return "warning";
   };
@@ -130,7 +129,9 @@ export default function Reg() {
     >
       <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Электронная почта</Form.Label>
+          <Form.Label style={{ paddingRight: "300px" }}>
+            Электронная почта:
+          </Form.Label>
           <Form.Control
             style={{ fontSize: "25px", width: "500px", height: "50px" }}
             name="email"
@@ -145,7 +146,9 @@ export default function Reg() {
             {emailError}
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Label>Пароль</Form.Label>
+        <h1></h1>
+        <h1></h1>
+        <Form.Label style={{ paddingRight: "470px" }}>Пароль:</Form.Label>
         <InputGroup className="mb-3" style={{ width: "500px" }}>
           <FormControl
             style={{ fontSize: "25px", width: "400px", height: "50px" }}
@@ -171,7 +174,7 @@ export default function Reg() {
         </InputGroup>
         <Button
           className="w-20 btn-light btn-outline-dark"
-          style={{ fontSize: "32px", width: "220px", marginTop: "20px" }}
+          style={{ fontSize: "30px", width: "150px", marginTop: "50px" }}
           type="submit"
         >
           Создать

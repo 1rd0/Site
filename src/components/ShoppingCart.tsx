@@ -77,20 +77,45 @@ export function ShoppingCart({ isOpen }: ShoppingCartProviderProps) {
           {cartitems.map((item) => (
             <CartItem key={item.id} {...item} />
           ))}
-          <div className="ms-auto fw-bold fs-5">
-            <Button
-              style={{ marginRight: "80px" }}
-              className=" ms-auto fw-bold fs-5 w-20 btn-light btn-outline-success"
-              onClick={placeOrder}
-            >
-              Оформить заказ
-            </Button>
-            Total{" "}
-            {formatCurrency(
-              cartitems.reduce((total, cartItem) => {
-                const item = items.find((i) => i.id === cartItem.id);
-                return total + (item?.price || 0) * cartItem.quantity;
-              }, 0)
+          <div className="ms-auto   fs-5">
+            {cartitems.length > 0 ? (
+              <>
+                <Button
+                  style={{ marginRight: "100px" }}
+                  className="ms-auto fs-5 w-10 btn-light btn-outline-success"
+                  onClick={placeOrder}
+                >
+                  Оформить заказ
+                </Button>
+                All:{" "}
+                {formatCurrency(
+                  cartitems.reduce((total, cartItem) => {
+                    const item = items.find((i) => i.id === cartItem.id);
+                    return total + (item?.price || 0) * cartItem.quantity;
+                  }, 0)
+                )}
+              </>
+            ) : (
+              <>
+                <div
+                  style={{
+                    fontSize: "32px",
+                    display: "flex",
+                    flexWrap: "wrap",
+
+                    justifyContent: "center",
+                  }}
+                >
+                  Корзина пуста{" "}
+                  <Button
+                    style={{ marginRight: "90px" }}
+                    className="ms-auto fs-5 w-10 btn-light btn-outline-dark"
+                    href="/Products"
+                  >
+                    Вернуться к товарам
+                  </Button>{" "}
+                </div>
+              </>
             )}
           </div>
         </Stack>
