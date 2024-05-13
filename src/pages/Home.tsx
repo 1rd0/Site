@@ -26,7 +26,6 @@ export default function Home() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        //"https://2f9c-79-98-8-21.ngrok-free.app/api/User/login",
         "https://localhost:7259/api/User/login",
         { userName: username, passwordHashe: password }
       );
@@ -73,6 +72,7 @@ export default function Home() {
         fontFamily: "Montserrat",
         fontStyle: "normal",
         fontSize: "35px",
+        marginTop: "50px",
       }}
     >
       {isLoggedIn ? (
@@ -84,7 +84,9 @@ export default function Home() {
             alignItems: "center",
           }}
         >
-          <p>Добро пожаловать, {username}!</p>
+          <img style={{ marginTop: "60px" }} src="/imgs/sakura.png"></img>
+
+          <p>Hello, {username}!</p>
 
           <Button
             style={{ marginTop: "30px", fontSize: "32px", width: "220px" }}
@@ -97,7 +99,6 @@ export default function Home() {
           >
             Выйти
           </Button>
-          <img style={{ marginTop: "20px" }} src="/imgs/sakura.png"></img>
         </div>
       ) : (
         <div>

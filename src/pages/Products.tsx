@@ -117,7 +117,13 @@ export default function Store() {
 
   return (
     <>
-      <div style={{ fontFamily: "Montserrat", fontStyle: "normal" }}>
+      <div
+        style={{
+          backgroundColor: "white",
+          fontFamily: "Montserrat",
+          fontStyle: "normal",
+        }}
+      >
         <h1 style={{ fontSize: "62px" }}>Товары </h1>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div

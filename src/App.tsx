@@ -12,6 +12,8 @@ import Reg from "./pages/Reg";
 
 import OffcanvasExample from "./components/ex";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
+import Footer from "./components/Footer";
+ 
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
           <Route path="/Reg" element={<Reg />} />
         </Routes>
       </Container>
+      <Footer />
     </ShoppingCartProvider>
   );
 }
