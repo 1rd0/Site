@@ -26,7 +26,7 @@ export function Items({
     decreaseCartQuantitu,
     removefromcart,
   } = useShoppingCart();
-  const [isHovered, setIsHovered] = useState(false); // State to track hover state
+  const [isHovered, setIsHovered] = useState(false); 
 
   const quantity = getItemQuantitu(id);
   return (
@@ -47,11 +47,19 @@ export function Items({
       ></Card.Img>
       <Card.Body className="d-flex flex-column">
         <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
-          <span className="fs-2">{name}</span>
+          <span
+            style={{
+              textDecoration: isHovered ? "underline" : "none",
+              backgroundColor: "white",
+            }}
+            className="fs-2"
+          >
+            {name}
+          </span>
 
           <span className="ms-2 text-muted ">{formatCurrency(price)}</span>
         </Card.Title>
-        <Card.Footer>
+        <Card.Footer style={{ backgroundColor: "white" }}>
           <span className="fs-4">{description}</span>
         </Card.Footer>
         <div className="mt-auto">

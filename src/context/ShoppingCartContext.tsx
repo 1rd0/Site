@@ -19,7 +19,7 @@ type ShoppingCartContext = {
   increaseCartQuantitu: (id: number) => void;
   decreaseCartQuantitu: (id: number) => void;
   removefromcart: (id: number) => void;
-  setCartItems: (items: CartItem[]) => void; // Добавляем метод setCartItems
+  setCartItems: (items: CartItem[]) => void; 
 
   cartQuantity: number;
   cartitems: CartItem[];

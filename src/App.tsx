@@ -13,14 +13,13 @@ import Reg from "./pages/Reg";
 import OffcanvasExample from "./components/ex";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import Footer from "./components/Footer";
- 
 
 function App() {
   return (
     <ShoppingCartProvider>
-      <ToastContainer />
+      <ToastContainer style={{ backgroundColor: "white" }} />
       <OffcanvasExample />
-      <Container className="mb-4">
+      <Container style={{ backgroundColor: "white" }} className="mb-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Products" element={<Products />} />
